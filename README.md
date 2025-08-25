@@ -41,7 +41,3 @@ Removes all symbolic links created by the install script.
 ```
 
 Shows usage information.
-
-## Currently Managed Files
-
-- `.vimrc` - Vim configuration
