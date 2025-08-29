@@ -1,9 +1,3 @@
--- Source existing vimrc for compatibility
-vim.cmd("source ~/.vimrc")
-
--- Create Explore command
-vim.api.nvim_create_user_command("E", "Explore", {})
-
 -- Bootstrap lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -20,6 +14,18 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugin setup
 require("lazy").setup({
+  -- Treesitter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        highlight = { enable = true },
+        indent = { enable = true },
+      }
+    end
+  },
+
   -- Telescope fuzzy finder
   {
     'nvim-telescope/telescope.nvim',
@@ -28,23 +34,15 @@ require("lazy").setup({
     config = function()
       require('telescope').setup{
         defaults = {
-          -- Default configuration for telescope goes here:
           mappings = {
             i = {
-              -- map actions.which_key to <C-h> (default: <C-/>)
               ["<C-h>"] = "which_key"
             }
           }
         },
         pickers = {
-          -- Default configuration for builtin pickers goes here:
-          find_files = {
-            theme = "dropdown",
-          }
+          find_files = { theme = "dropdown" }
         },
-        extensions = {
-          -- Your extension configuration goes here:
-        }
       }
     end
   },
@@ -59,6 +57,9 @@ require("lazy").setup({
   },
 })
 
+-- Leader key
+vim.g.mapleader = " "
+
 -- Telescope keymaps
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -68,7 +69,4 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Telescope recent files' })
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Telescope commands' })
 vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Telescope grep string under cursor' })
-
--- Set leader key (if not already set in vimrc)
-vim.g.mapleader = " "
 
