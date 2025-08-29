@@ -40,6 +40,13 @@ create_symlink() {
     # Create backup directory if it doesn't exist
     mkdir -p "$backup_dir"
     
+    # Ensure parent directory of target exists
+    local target_parent="$(dirname "$target")"
+    if [[ ! -d "$target_parent" ]]; then
+        mkdir -p "$target_parent"
+        print_status "Created parent directory: $target_parent"
+    fi
+    
     # If target exists and is not a symlink to our dotfile
     if [[ -e "$target" ]] && [[ ! -L "$target" || "$(readlink "$target")" != "$source" ]]; then
         local backup_file="$backup_dir/$(basename "$target").backup.$(date +%Y%m%d_%H%M%S)"
@@ -70,6 +77,7 @@ install_dotfiles() {
     # Add more entries here as you add more dotfiles
     local dotfiles=(
         ".vimrc:$HOME/.vimrc"
+		".config/nvim:$HOME/.config/nvim"
         # Add more dotfiles here, for example:
         # ".bashrc:$HOME/.bashrc"
         # ".zshrc:$HOME/.zshrc"
@@ -82,10 +90,10 @@ install_dotfiles() {
         IFS=':' read -r source_file target_path <<< "$dotfile"
         local source_path="$DOTFILES_DIR/$source_file"
         
-        if [[ -f "$source_path" ]]; then
+        if [[ -f "$source_path" ]] || [[ -d "$source_path" ]]; then
             create_symlink "$source_path" "$target_path"
         else
-            print_warning "Source file not found: $source_path"
+            print_warning "Source file or directory not found: $source_path"
         fi
     done
     
@@ -98,6 +106,7 @@ uninstall_dotfiles() {
     
     local dotfiles=(
         "$HOME/.vimrc"
+		"$HOME/.config/nvim"
         # Add more paths here as you add more dotfiles
     )
     
@@ -117,6 +126,7 @@ status_dotfiles() {
     
     local dotfiles=(
         ".vimrc"
+        ".config/nvim"
         # Add more dotfiles here
     )
     
@@ -133,8 +143,8 @@ status_dotfiles() {
             else
                 echo -e "${YELLOW}⚠ Linked to different location: $link_target${NC}"
             fi
-        elif [[ -f "$target_path" ]]; then
-            echo -e "${YELLOW}⚠ File exists but not linked${NC}"
+        elif [[ -f "$target_path" ]] || [[ -d "$target_path" ]]; then
+            echo -e "${YELLOW}⚠ File/directory exists but not linked${NC}"
         else
             echo -e "${RED}✗ Not linked${NC}"
         fi
