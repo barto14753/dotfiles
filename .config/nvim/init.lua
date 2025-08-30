@@ -17,6 +17,7 @@ require("lazy").setup({
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
+    ensure_installed = { "lua", "vim", "python" },
     build = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
@@ -69,4 +70,17 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Telescope recent files' })
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Telescope commands' })
 vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Telescope grep string under cursor' })
+
+
+-- Auto update Treesitter parsers
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    require("nvim-treesitter.install").update({ with_sync = true })()
+  end,
+})
+
+-- init.lua
+vim.api.nvim_create_user_command("E", "Explore", {})
+
+
 
