@@ -17,7 +17,7 @@ require("lazy").setup({
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    ensure_installed = { "lua", "vim", "python", "bash", "java", "yaml", "json" },
+    ensure_installed = { "lua", "vim", "python", "bash", "java", "yaml", "json", "dockerfile" },
     build = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
