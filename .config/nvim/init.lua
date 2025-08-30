@@ -17,7 +17,7 @@ require("lazy").setup({
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    ensure_installed = { "lua", "vim", "python" },
+    ensure_installed = { "lua", "vim", "python", "bash", "java", "yaml", "json" },
     build = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
@@ -79,8 +79,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
--- init.lua
+vim.cmd("source ~/.vimrc")
 vim.api.nvim_create_user_command("E", "Explore", {})
-
 
 
