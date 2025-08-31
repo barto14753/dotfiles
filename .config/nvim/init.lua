@@ -1,62 +1,61 @@
--- Bootstrap lazy.nvim plugin manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+-- Bootstrap packer.nvim
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
-vim.opt.rtp:prepend(lazypath)
+
+local packer_bootstrap = ensure_packer()
 
 -- Plugin setup
-require("lazy").setup({
+require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
+
   -- Treesitter
-  {
+  use {
     'nvim-treesitter/nvim-treesitter',
-    ensure_installed = { "lua", "vim", "python", "bash", "java", "yaml", "json", "dockerfile" },
-    build = ':TSUpdate',
+    run = ':TSUpdate',
     config = function()
-      require'nvim-treesitter.configs'.setup {
+      local ts = require'nvim-treesitter.configs'
+      ts.setup {
         highlight = { enable = true },
         indent = { enable = true },
       }
-    end
-  },
 
-  -- Telescope fuzzy finder
-  {
+      -- Ensure parsers are installed
+      local parsers = { "lua", "vim", "python", "bash", "java", "yaml", "json", "dockerfile" }
+      for _, parser in ipairs(parsers) do
+        if not require("nvim-treesitter.parsers").has_parser(parser) then
+          require("nvim-treesitter.install").install(parser)
+        end
+      end
+    end
+  }
+
+  -- Telescope
+  use {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('telescope').setup{
-        defaults = {
-          mappings = {
-            i = {
-              ["<C-h>"] = "which_key"
-            }
-          }
-        },
-        pickers = {
-          find_files = { theme = "dropdown" }
-        },
-      }
-    end
-  },
+    requires = { 'nvim-lua/plenary.nvim' }, 
+  }
 
-  -- Optional: Better performance for telescope
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make',
-    config = function()
-      require('telescope').load_extension('fzf')
-    end
-  },
-})
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+
+use {
+  "github/copilot.vim",
+  config = function()
+    -- Opcjonalnie: konfiguracja Copilota
+  end
+}
+
+end)
 
 -- Leader key
 vim.g.mapleader = " "
@@ -71,15 +70,7 @@ vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Telescope recent f
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Telescope commands' })
 vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Telescope grep string under cursor' })
 
-
--- Auto update Treesitter parsers
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    require("nvim-treesitter.install").update({ with_sync = true })()
-  end,
-})
-
-vim.cmd("source ~/.vimrc")
+-- Optional: Create simple "E" command for Explore
 vim.api.nvim_create_user_command("E", "Explore", {})
-
+vim.cmd("source ~/.vimrc")
 
