@@ -116,8 +116,6 @@ use 'folke/tokyonight.nvim'
 
 end)
 
-
-
 -- Leader key
 vim.g.mapleader = " "
 
@@ -151,3 +149,4 @@ vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = tr
 -- Open a new tab with file explorer
 vim.keymap.set("n", "<leader>tn", ":tabnew | Explore<CR>", { noremap = true, silent = true })
 
+vim.cmd[[colorscheme tokyonight]]
