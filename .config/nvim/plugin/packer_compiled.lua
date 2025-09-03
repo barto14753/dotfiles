@@ -81,7 +81,7 @@ _G.packer_plugins = {
     url = "https://github.com/github/copilot.vim"
   },
   ["nvim-treesitter"] = {
-    config = { "\27LJ\2\næ\2\0\0\n\0\14\0 6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3B\1\2\0015\1\b\0006\2\t\0\18\4\1\0B\2\2\4X\5\14€6\a\0\0'\t\n\0B\a\2\0029\a\v\a\18\t\6\0B\a\2\2\14\0\a\0X\a\6€6\a\0\0'\t\f\0B\a\2\0029\a\r\a\18\t\6\0B\a\2\1E\5\3\3R\5ð\127K\0\1\0\finstall\28nvim-treesitter.install\15has_parser\28nvim-treesitter.parsers\vipairs\1\t\0\0\blua\bvim\vpython\tbash\tjava\tyaml\tjson\15dockerfile\vindent\1\0\1\venable\2\14highlight\1\0\2\14highlight\0\vindent\0\1\0\1\venable\2\nsetup\28nvim-treesitter.configs\frequire\0" },
+    config = { "\27LJ\2\næ\2\0\0\n\0\14\0 6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3B\1\2\0015\1\b\0006\2\t\0\18\4\1\0B\2\2\4X\5\14€6\a\0\0'\t\n\0B\a\2\0029\a\v\a\18\t\6\0B\a\2\2\14\0\a\0X\a\6€6\a\0\0'\t\f\0B\a\2\0029\a\r\a\18\t\6\0B\a\2\1E\5\3\3R\5ð\127K\0\1\0\finstall\28nvim-treesitter.install\15has_parser\28nvim-treesitter.parsers\vipairs\1\t\0\0\blua\bvim\vpython\tbash\tjava\tyaml\tjson\15dockerfile\vindent\1\0\1\venable\2\14highlight\1\0\2\vindent\0\14highlight\0\1\0\1\venable\2\nsetup\28nvim-treesitter.configs\frequire\0" },
     loaded = true,
     path = "/home/bartek/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -106,22 +106,27 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/bartek/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-gitgutter"] = {
+    loaded = true,
+    path = "/home/bartek/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
+    url = "https://github.com/airblade/vim-gitgutter"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-web-devicons
-time([[Config for nvim-web-devicons]], true)
-try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\fdefault\2\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
-time([[Config for nvim-web-devicons]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\næ\2\0\0\n\0\14\0 6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3B\1\2\0015\1\b\0006\2\t\0\18\4\1\0B\2\2\4X\5\14€6\a\0\0'\t\n\0B\a\2\0029\a\v\a\18\t\6\0B\a\2\2\14\0\a\0X\a\6€6\a\0\0'\t\f\0B\a\2\0029\a\r\a\18\t\6\0B\a\2\1E\5\3\3R\5ð\127K\0\1\0\finstall\28nvim-treesitter.install\15has_parser\28nvim-treesitter.parsers\vipairs\1\t\0\0\blua\bvim\vpython\tbash\tjava\tyaml\tjson\15dockerfile\vindent\1\0\1\venable\2\14highlight\1\0\2\vindent\0\14highlight\0\1\0\1\venable\2\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 -- Config for: copilot.vim
 time([[Config for copilot.vim]], true)
 try_loadstring("\27LJ\2\n\v\0\0\1\0\0\0\1K\0\1\0\0", "config", "copilot.vim")
 time([[Config for copilot.vim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\næ\2\0\0\n\0\14\0 6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3B\1\2\0015\1\b\0006\2\t\0\18\4\1\0B\2\2\4X\5\14€6\a\0\0'\t\n\0B\a\2\0029\a\v\a\18\t\6\0B\a\2\2\14\0\a\0X\a\6€6\a\0\0'\t\f\0B\a\2\0029\a\r\a\18\t\6\0B\a\2\1E\5\3\3R\5ð\127K\0\1\0\finstall\28nvim-treesitter.install\15has_parser\28nvim-treesitter.parsers\vipairs\1\t\0\0\blua\bvim\vpython\tbash\tjava\tyaml\tjson\15dockerfile\vindent\1\0\1\venable\2\14highlight\1\0\2\14highlight\0\vindent\0\1\0\1\venable\2\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\fdefault\2\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
+time([[Config for nvim-web-devicons]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

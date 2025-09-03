@@ -64,6 +64,54 @@ use {
 }
 
 
+use {
+  'lewis6991/gitsigns.nvim',
+  requires = { 'nvim-lua/plenary.nvim' },
+  config = function()
+    require('gitsigns').setup {
+      signs = {
+        add          = {hl = 'GitGutterAdd', text = '+', numhl='GitSignsAddNr', linehl='GitSignsAddLn'},
+        change       = {hl = 'GitGutterChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        delete       = {hl = 'GitGutterDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        topdelete    = {hl = 'GitGutterDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        changedelete = {hl = 'GitGutterChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      },
+      signcolumn = true,  -- pokazuje znaki w kolumnie
+      numhl      = false, -- highlight numeru linii
+      linehl     = false, -- highlight całej linii
+      word_diff  = false, -- highlight zmian w słowie
+      watch_gitdir = {
+        interval = 1000,
+        follow_files = true
+      },
+      attach_to_untracked = true,
+      current_line_blame = true, -- pokazuje autora i commit dla bieżącej linii
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- na końcu linii
+        delay = 500,
+      },
+      sign_priority = 6,
+      update_debounce = 100,
+      status_formatter = nil, -- używa domyślnego formatu
+    }
+
+    -- Skróty klawiszowe
+    local gs = package.loaded.gitsigns
+    vim.keymap.set('n', ']c', gs.next_hunk, {silent=true})
+    vim.keymap.set('n', '[c', gs.prev_hunk, {silent=true})
+    vim.keymap.set('n', '<leader>hs', gs.stage_hunk)
+    vim.keymap.set('n', '<leader>hr', gs.reset_hunk)
+    vim.keymap.set('n', '<leader>hS', gs.stage_buffer)
+    vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk)
+    vim.keymap.set('n', '<leader>hp', gs.preview_hunk)
+    vim.keymap.set('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    vim.keymap.set('n', '<leader>hd', gs.diffthis)
+    vim.keymap.set('n', '<leader>hD', function() gs.diffthis('~') end)
+  end
+}
+
+
 end)
 
 -- Leader key
@@ -99,4 +147,7 @@ vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = tr
 
 -- Open a new tab with file explorer
 vim.keymap.set("n", "<leader>tn", ":tabnew | Explore<CR>", { noremap = true, silent = true })
+
+
+
 
