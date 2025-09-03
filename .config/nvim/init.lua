@@ -12,6 +12,7 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+
 -- Plugin setup
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
@@ -111,8 +112,11 @@ use {
   end
 }
 
+use 'folke/tokyonight.nvim'
 
 end)
+
+
 
 -- Leader key
 vim.g.mapleader = " "
@@ -131,7 +135,6 @@ vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Telescope grep 
 vim.api.nvim_create_user_command("E", "Explore", {})
 vim.cmd("source ~/.vimrc")
 
-
 -- Tab management keymaps
 vim.keymap.set("n", "<leader>tn", ":tabnew<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
@@ -147,7 +150,4 @@ vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = tr
 
 -- Open a new tab with file explorer
 vim.keymap.set("n", "<leader>tn", ":tabnew | Explore<CR>", { noremap = true, silent = true })
-
-
-
 
