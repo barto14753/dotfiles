@@ -76,27 +76,27 @@ use {
         topdelete    = {hl = 'GitGutterDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         changedelete = {hl = 'GitGutterChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
       },
-      signcolumn = true,  -- pokazuje znaki w kolumnie
-      numhl      = false, -- highlight numeru linii
-      linehl     = false, -- highlight całej linii
-      word_diff  = false, -- highlight zmian w słowie
+      signcolumn = true, 
+      numhl      = true,
+      linehl     = true,
+      word_diff  = true,
       watch_gitdir = {
         interval = 1000,
         follow_files = true
       },
       attach_to_untracked = true,
-      current_line_blame = true, -- pokazuje autora i commit dla bieżącej linii
+      current_line_blame = true,
       current_line_blame_opts = {
         virt_text = true,
-        virt_text_pos = 'eol', -- na końcu linii
+        virt_text_pos = 'eol',
         delay = 500,
       },
       sign_priority = 6,
       update_debounce = 100,
-      status_formatter = nil, -- używa domyślnego formatu
+      status_formatter = nil,
     }
 
-    -- Skróty klawiszowe
+	-- Keymaps
     local gs = package.loaded.gitsigns
     vim.keymap.set('n', ']c', gs.next_hunk, {silent=true})
     vim.keymap.set('n', '[c', gs.prev_hunk, {silent=true})
