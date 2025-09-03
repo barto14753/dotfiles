@@ -51,9 +51,18 @@ require('packer').startup(function(use)
 use {
   "github/copilot.vim",
   config = function()
-    -- Opcjonalnie: konfiguracja Copilota
   end
 }
+
+use {
+  'nvim-tree/nvim-web-devicons',
+  config = function()
+    require('nvim-web-devicons').setup {
+      default = true,
+    }
+  end
+}
+
 
 end)
 
@@ -87,5 +96,7 @@ vim.keymap.set("n", "<leader>3", "3gt")
 
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = true })
+
+-- Open a new tab with file explorer
 vim.keymap.set("n", "<leader>tn", ":tabnew | Explore<CR>", { noremap = true, silent = true })
 
