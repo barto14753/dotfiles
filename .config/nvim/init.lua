@@ -134,7 +134,7 @@ vim.api.nvim_create_user_command("E", "Explore", {})
 vim.cmd("source ~/.vimrc")
 
 -- Tab management keymaps
-vim.keymap.set("n", "<leader>tn", ":tabnew<CR>")
+vim.keymap.set("n", "<leader><Tab>", ":tabnew<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 vim.keymap.set("n", "<leader>to", ":tabonly<CR>")
 vim.keymap.set("n", "<leader>tl", ":tabnext<CR>")
@@ -147,6 +147,6 @@ vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = true })
 
 -- Open a new tab with file explorer
-vim.keymap.set("n", "<leader>tn", ":tabnew | Explore<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader><Tab>", ":tabnew | Explore<CR>", { noremap = true, silent = true })
 
 vim.cmd[[colorscheme tokyonight]]
