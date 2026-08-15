@@ -78,6 +78,7 @@ install_dotfiles() {
     local dotfiles=(
         ".vimrc:$HOME/.vimrc"
 		".config/nvim:$HOME/.config/nvim"
+		".tmux.conf.local:$HOME/.tmux.conf.local"
         # Add more dotfiles here, for example:
         # ".bashrc:$HOME/.bashrc"
         # ".zshrc:$HOME/.zshrc"
@@ -107,6 +108,7 @@ uninstall_dotfiles() {
     local dotfiles=(
         "$HOME/.vimrc"
 		"$HOME/.config/nvim"
+		"$HOME/.tmux.conf.local"
         # Add more paths here as you add more dotfiles
     )
     
@@ -127,6 +129,7 @@ status_dotfiles() {
     local dotfiles=(
         ".vimrc"
         ".config/nvim"
+        ".tmux.conf.local"
         # Add more dotfiles here
     )
     

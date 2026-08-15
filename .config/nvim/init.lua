@@ -126,8 +126,49 @@ vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Telescope grep 
 vim.api.nvim_create_user_command("E", "Explore", {})
 vim.cmd("source ~/.vimrc")
 
+-- netrw: directory tree style
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+vim.g.netrw_browse_split = 3
+
+-- Toggle file tree sidebar: Space+e (single tree, not a tab)
+vim.keymap.set("n", "<leader>e", ":Lexplore<CR>", { noremap = true, silent = true })
+
+-- Tab switching: Tab / Shift+Tab
+vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = true })
+
+-- Close current tab: Ctrl+c (open file tree if last tab)
+vim.keymap.set("n", "<C-c>", function()
+  if vim.fn.tabpagenr('$') > 1 then
+    vim.cmd("tabclose")
+    return
+  end
+  if vim.bo.filetype == "netrw" then
+    return
+  end
+  if vim.bo.modified then
+    vim.api.nvim_echo({{"Ctrl+C: save the file first", "WarningMsg"}}, true, {})
+    return
+  end
+  vim.cmd("bwipeout!")
+  local tree_open = false
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "netrw" then
+      tree_open = true
+      break
+    end
+  end
+  if not tree_open then
+    vim.cmd("Lexplore")
+  end
+end, { noremap = true, silent = true })
+
+-- Quit nvim completely: Ctrl+d
+vim.keymap.set("n", "<C-d>", ":qa<CR>", { noremap = true, silent = true })
+
 -- Tab management keymaps
-vim.keymap.set("n", "<leader><Tab>", ":tabnew<CR>")
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
 vim.keymap.set("n", "<leader>to", ":tabonly<CR>")
 vim.keymap.set("n", "<leader>tl", ":tabnext<CR>")
@@ -135,11 +176,5 @@ vim.keymap.set("n", "<leader>th", ":tabprevious<CR>")
 vim.keymap.set("n", "<leader>1", "1gt")
 vim.keymap.set("n", "<leader>2", "2gt")
 vim.keymap.set("n", "<leader>3", "3gt")
-
-vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { noremap = true, silent = true })
-
--- Open a new tab with file explorer
-vim.keymap.set("n", "<leader><Tab>", ":tabnew | Explore<CR>", { noremap = true, silent = true })
 
 vim.cmd[[colorscheme tokyonight]]
