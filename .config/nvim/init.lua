@@ -24,17 +24,10 @@ require('packer').startup(function(use)
     config = function()
       local ts = require'nvim-treesitter.configs'
       ts.setup {
+        ensure_installed = { "lua", "vim", "python", "bash", "java", "yaml", "json", "dockerfile" },
         highlight = { enable = true },
         indent = { enable = true },
       }
-
-      -- Ensure parsers are installed
-      local parsers = { "lua", "vim", "python", "bash", "java", "yaml", "json", "dockerfile" }
-      for _, parser in ipairs(parsers) do
-        if not require("nvim-treesitter.parsers").has_parser(parser) then
-          require("nvim-treesitter.install").install(parser)
-        end
-      end
     end
   }
 
