@@ -83,7 +83,7 @@ install_dotfiles() {
         # ".bashrc:$HOME/.bashrc"
         # ".zshrc:$HOME/.zshrc"
         # ".gitconfig:$HOME/.gitconfig"
-        # ".tmux.conf:$HOME/.tmux.conf"
+        ".tmux.conf:$HOME/.tmux.conf"
     )
     
     # Create symlinks for each dotfile
