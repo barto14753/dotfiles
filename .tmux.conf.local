@@ -10,3 +10,66 @@ bind-key h select-pane -L
 bind-key j select-pane -D
 bind-key k select-pane -U
 bind-key l select-pane -R
+
+set -g mouse on
+
+# ==========================================
+# MODERN / GHOSTTY STYLE
+# ==========================================
+
+set -g status-position bottom
+set -g status-interval 1
+
+# Dark background
+set -g status-style "bg=#111111,fg=#8b8b8b"
+
+# ==========================================
+# WINDOWS
+# ==========================================
+
+# Separator między tabami
+set -g window-status-separator " "
+
+# Inactive tabs
+set -g window-status-format "#[fg=#666666]  #I  #[fg=#888888]#W"
+
+# Active tab
+set -g window-status-current-format "#[fg=#ffffff,bold]  #I  #W #[default]"
+
+set -g window-status-style "bg=#111111,fg=#777777"
+set -g window-status-current-style "bg=#111111,fg=#ffffff,bold"
+
+# ==========================================
+# LEFT
+# ==========================================
+
+set -g status-left-length 30
+set -g status-left "#[fg=#ffffff,bold]  ●  #[fg=#888888]tmux"
+
+# ==========================================
+# RIGHT
+# ==========================================
+
+set -g status-right-length 40
+set -g status-right "#[fg=#666666]%a %d %b  #[fg=#ffffff]%H:%M:%S  "
+
+# ==========================================
+# PANE BORDERS
+# ==========================================
+
+set -g pane-border-style "fg=#222222"
+set -g pane-active-border-style "fg=#555555"
+
+# ==========================================
+# COMMAND / MESSAGE
+# ==========================================
+
+set -g message-style "bg=#222222,fg=#ffffff"
+set -g message-command-style "bg=#222222,fg=#ffffff"
+
+# ==========================================
+# TERMINAL
+# ==========================================
+
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"

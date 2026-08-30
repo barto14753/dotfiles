@@ -12,3 +12,4 @@ augroup YankHighlight
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup END
 
+colorscheme slate
