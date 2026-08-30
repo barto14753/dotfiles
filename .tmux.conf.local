@@ -73,3 +73,23 @@ set -g message-command-style "bg=#222222,fg=#ffffff"
 
 set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",xterm-256color:Tc"
+
+# ==========================================
+# WINDOWS
+# ==========================================
+
+set -g window-status-separator " "
+
+# Inactive tabs
+set -g window-status-format \
+    "#[fg=#666666,bg=#111111]  #I  #W  "
+
+# Active tab — highlighted
+set -g window-status-current-format \
+    "#[fg=#ffffff,bg=#2a2a2a,bold]  #I  #W  "
+
+set -g window-status-style \
+    "bg=#111111,fg=#666666"
+
+set -g window-status-current-style \
+    "bg=#2a2a2a,fg=#ffffff,bold"
