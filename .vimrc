@@ -1,5 +1,4 @@
 set number
-set relativenumber
 set timeoutlen=300
 inoremap jk <Esc>
 syntax enable
@@ -12,4 +11,5 @@ augroup YankHighlight
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup END
 
-colorscheme slate
+colorscheme wildcharm
+set background=dark
