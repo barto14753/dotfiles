@@ -1,4 +1,6 @@
-set number
+set ruler
+set hlsearch
+set ai
 set timeoutlen=300
 inoremap jk <Esc>
 syntax enable
@@ -11,5 +13,11 @@ augroup YankHighlight
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup END
 
-colorscheme wildcharm
+highlight Comment ctermfg=green
+
+
+syntax on
 set background=dark
+set number
+colorscheme default
+
